@@ -1,6 +1,8 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+
+export PATH=$PATH:/usr/local/mysql/bin
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/chenxi/.oh-my-zsh
 
@@ -83,5 +85,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias vim="mvim -v"
+alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

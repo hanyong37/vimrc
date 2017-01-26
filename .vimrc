@@ -2,8 +2,15 @@ set clipboard=unnamed
 set nocompatible               " be iMproved
 set encoding=utf8
 set hlsearch
-"filetype off
 
+runtime macros/matchit.vim
+
+"filetype off
+" Change cursor shape between insert and normal mode in iTerm2.app
+"if $TERM_PRO"GRAM =~ "iTerm"
+  "let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
+  "let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
+"endif
 
 "chenxi customized keymap:
 "simulate emeacs keys:
@@ -18,7 +25,6 @@ imap <C-l> <RIGHT>
 imap <C-j> <DOWN>
 imap <C-k> <UP>
 
-"
 
 
 "use leader for window operation
@@ -26,9 +32,14 @@ let mapleader=  " "
 nmap <leader>j  <c-d>
 nmap <leader>k  <c-u>
 nmap <leader>w  <c-w>
+
 "scroll  related window
 nmap ∆ <c-w>p<c-e><c-w>p
 nmap ˚ <c-w>p<c-y><c-w>p
+
+" Complete English word
+setlocal dictionary+=~/.vim/dict/english.dict
+
 
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -61,7 +72,7 @@ set hidden
 set cursorline
 "set cursorcolumn
 
-colorscheme desert
+colorscheme zenburn
 
 if has("gui_running")
   syntax enable
@@ -72,44 +83,41 @@ if has("gui_running")
   set shell=/bin/bash
 endif
 
-" EasyMotion_leader_key .
-" Plugin Plugin here for Ruby on Rails
 " git
 Plugin 'tpope/vim-fugitive'
+
 " 中文输入法问题
+" http://www.jianshu.com/p/4d81b7e32bff
+"Plugin 'CodeFalling/fcitx-vim-osx'
+
 " Plugin 'hongqn/vim-osx-ime'
+
+" Support Ruby
+Plugin 'vim-ruby/vim-ruby'
+" To use var vir to select Ruby code black
+Plugin 'kana/vim-textobj-user'
+Plugin 'nelstrom/vim-textobj-rubyblock'
+
 " ruby command for rvm
 Plugin 'tpope/vim-rvm'
 " quickly move cursor, try ,,w
 Plugin 'Lokaltog/vim-easymotion'
+
 " quickly write HTML, just like zencoding but simple engough
 "Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 "let g:sparkupNextMapping= "<c-m>"
-Plugin 'mattn/emmet-vim'
-let g:user_emmet_install_global = 1
-let g:user_emmet_mode='inv'
-let g:user_emmet_expandabbr_key= '<C-z>'
-let g:user_emmet_expandabbr_key = '<C-z>,'
-let g:user_emmet_expandword_key = '<C-z>;'
-let g:user_emmet_update_tag = '<C-z>u'
-let g:user_emmet_balancetaginward_key = '<C-z>d'
-let g:user_emmet_balancetagoutward_key = '<C-z>D'
-let g:user_emmet_next_key = '<C-z>n'
-let g:user_emmet_prev_key = '<C-z>N'
-let g:user_emmet_imagesize_key = '<C-z>i'
-let g:user_emmet_togglecomment_key = '<C-z>/'
-let g:user_emmet_splitjointag_key = '<C-z>j'
-let g:user_emmet_removetag_key = '<C-z>k'
-let g:user_emmet_anchorizeurl_key = '<C-z>a'
-let g:user_emmet_anchorizesummary_key = '<C-z>A'
-let g:user_emmet_mergelines_key = '<C-z>m'
-let g:user_emmet_codepretty_key = '<C-z>c'
 
+Plugin 'mattn/emmet-vim'
+let g:user_emmet_leader_key = '<C-i>'
+let g:user_emmet_install_global = 1
 autocmd FileType html,css,eruby EmmetInstall
+
 " power vim plugin for rails
 Plugin 'tpope/vim-rails.git'
+
 " vim rails syntax complete, try ctrl+x ctrl+u
 set completefunc=syntaxcomplete#Complete
+
 " quickly comment your code, try ,cc on selected line
 Plugin 'vim-scripts/The-NERD-Commenter'
 
@@ -127,7 +135,6 @@ let g:vim_markdown_folding_disabled = 1
 
 " file tree like something called IDE
 Plugin 'scrooloose/nerdtree'
-map <silent><F8> :NERDTree<CR>
 nmap <leader>f :NERDTreeToggle <CR>
 
 " coffeescript
@@ -197,11 +204,31 @@ Plugin 'majutsushi/tagbar'
 nmap <leader>t :Tagbar <CR>
 
 " code completion
-" Plugin 'valloric/youcompleteme'
-
-
-
+"Plugin 'valloric/youcompleteme'
+"youcompleteme  默认tab  s-tab 和 ultisnips 冲突
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+" 括号补齐
+Plugin 'raimondi/delimitmate'
 Plugin 'pangloss/vim-javascript'
+
+" add end in ruby code
+Plugin 'tpope/vim-endwise'
+
+
+" 代码段
+"Plugin 'sirver/ultisnips'
+" 别人收集的片段
+"Plugin 'honza/vim-snippets'
+
+" 颜色主题
+Plugin 'chriskempson/base16-vim'
+Plugin 'tomasr/molokai'
+" 换颜色
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-colorscheme-switcher'
+
+
 
 call vundle#end()
 " support css word with -
@@ -215,4 +242,3 @@ set t_Co=256
 " colorscheme molokai
 " clear trailing spaces when u save
 autocmd BufWritePre * :%s/\s\+$//e
-" asdfasdf
